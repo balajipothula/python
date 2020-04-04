@@ -1,0 +1,5 @@
+no   = int(101)
+name = str("Raj")
+sal  = float(89268.71)
+emp = str("Employee No: {} | Name: {} | Salary: {}")
+print(emp.format(no, name, sal))
