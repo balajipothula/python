@@ -18,6 +18,7 @@ try:
 except IOError as e:
   print("system message: " + str(e))
   print("user   message: io error")
+  print(sys.exc_info()[0])
 except Exception as e:
   print("system message: " + str(e))
   print("user   message: exception")
