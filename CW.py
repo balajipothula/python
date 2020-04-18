@@ -2,11 +2,13 @@ import boto3
 
 client = boto3.client('logs')
 
-#logGroupName  =
-#logGroupNames =
-#startTime     =
-#endTime       =
-#queryString   =
-#limit         =
+logGroupName = "myloggroup"
 
-response = client.start_query(logGroupName='string', logGroupNames=['string', ], startTime=123, endTime=123, queryString='string', limit=123)
+queryString  = """
+FILTER  @message IN "ERROR           |
+PARSE   @message "* [*] *" as @error |
+DISPLAY @error                       |
+LIMIT   1
+"""
+
+response = client.start_query(logGroupName='string', queryString='string')
