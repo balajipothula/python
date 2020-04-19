@@ -9,6 +9,8 @@ FILTER  @message IN "ERROR           |
 PARSE   @message "* [*] *" as @error |
 DISPLAY @error                       |
 LIMIT   1
-"""
+""".strip()
+
+print(queryString)
 
 response = client.start_query(logGroupName='string', queryString='string')
