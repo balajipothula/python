@@ -3,30 +3,30 @@ import random
 
 item = random.randrange(65536)
 
-n_array = [n for n in range(65536)]
+item_array = [item for item in range(65536)]
 
-n_array_len = len(n_array)
+item_array_len = len(item_array)
 
 # binary search.
 head = 0
-tail = n_array_len - 1
-start = time.time_ns()
+tail = item_array_len - 1
+start_exec_time = time.time_ns()
 while head <= tail:
   mid = (head + tail) // 2
-  if n_array[mid] == item:
-    exec_time = time.time_ns() - start
+  if item == item_array[mid]:
+    exec_time = time.time_ns() - start_exec_time
     print(item, " found at index ", mid, "binary search execution time ", exec_time)
     break
   else:
-    if item < n_array[mid]:
+    if item < item_array[mid]:
       tail = mid - 1
     else:
       head = mid + 1
 
-# linier search.
-start = time.time_ns()
-for i in range(n_array_len):
-  if item == n_array[i]:
-    exec_time = time.time_ns() - start
-    print(item, " found at index ", i,   "linier search execution time ", exec_time)
+# linear search.
+start_exec_time = time.time_ns()
+for i in range(item_array_len):
+  if item == item_array[i]:
+    exec_time = time.time_ns() - start_exec_time
+    print(item, " found at index ", i,   "linear search execution time ", exec_time)
     break
