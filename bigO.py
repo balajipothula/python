@@ -1,10 +1,8 @@
 import time
 import random
 
-item = random.randrange(65536)
-
-item_array = [item for item in range(65536)]
-
+item           = random.randrange(65536)
+item_array     = [item for item in range(65536)]
 item_array_len = len(item_array)
 
 # binary search.
