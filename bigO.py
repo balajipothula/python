@@ -14,7 +14,8 @@ start = time.time_ns()
 while head <= tail:
   mid = (head + tail) // 2
   if n_array[mid] == item:
-    print(item, " found at index ", mid, "binary search execution time ", time.time_ns() - start)
+    exec_time = time.time_ns() - start
+    print(item, " found at index ", mid, "binary search execution time ", exec_time)
     break
   else:
     if item < n_array[mid]:
@@ -26,5 +27,6 @@ while head <= tail:
 start = time.time_ns()
 for i in range(n_array_len):
   if item == n_array[i]:
-    print(item, " found at index ", i,   "linier search execution time ", time.time_ns() - start)
+    exec_time = time.time_ns() - start
+    print(item, " found at index ", i,   "linier search execution time ", exec_time)
     break
