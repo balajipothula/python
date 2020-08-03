@@ -1,21 +1,23 @@
 import json
 import boto3
 
+service     = "rds-data"
 region_name = "us-east-1"
-secretArn   = "arn:aws:secretsmanager:us-east-1:123456789012:secret:office_secret-9B15Hi"
-database    = "office"
-resourceArn = "arn:aws:rds:us-east-1:123456789012:cluster:office-pg-cluster"
-sql         = "SELECT tablename FROM pg_catalog.pg_tables ORDER BY tablename"
 
-client = boto3.client("rds-data", region_name = region_name)
+database    = "office_db"
+schema      = "office_schema"
+secretArn   = "arn:aws:secretsmanager:us-east-1:123456789012:secret:office_secret-9B15Hi"
+resourceArn = "arn:aws:rds:us-east-1:123456789012:cluster:office-cluster"
 
 def lambda_handler(event, context):
+
+  client = boto3.client(service, region_name = region_name)
+
   response = client.execute_statement(
     secretArn   = secretArn,
     database    = database,
     resourceArn = resourceArn,
-    sql         = sql
-  )
+    sql         = sql)
 
   print(json.dumps(response, indent = 2))
   
