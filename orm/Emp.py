@@ -5,8 +5,6 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine, MetaData, Table, Column, Integer, Numeric, String, Date
 from sqlalchemy.orm import sessionmaker
 
-import psycopg2
-
 Base = declarative_base()
 
 class Emp(Base):
