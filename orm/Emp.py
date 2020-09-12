@@ -26,9 +26,8 @@ class Emp(Base):
   def __repr__(self):
     return "{ id: '%s', name: '%s', dob: '%s', sal: '%s'}" % (self.id, self.name, self.dob, self.sal)
 
-
-#engine      = create_engine("sqlite:///:memory:", case_sensitive = True, convert_unicode = False, echo = True, encoding = "utf-8")
-engine      = create_engine("postgres://ejhoiybt:qqOl4yIEO4DTDLmniwf1U99aUXcMcV9x@lallah.db.elephantsql.com:5432/ejhoiybt")
+#engine     = create_engine("postgres://ejhoiybt:qqOl4yIEO4DTDLmniwf1U99aUXcMcV9x@lallah.db.elephantsql.com:5432/ejhoiybt")
+engine      = create_engine("sqlite:///:memory:", case_sensitive = True, convert_unicode = False, echo = True, encoding = "utf-8")
 metadata    = MetaData(engine)
 
 Table("Emp", metadata, 
