@@ -5,16 +5,18 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine, MetaData, Table, Column, Integer, Numeric, String, Date
 from sqlalchemy.orm import sessionmaker
 
+import psycopg2
+
 Base = declarative_base()
 
 class Emp(Base):
 
   __tablename__ = "Emp"
 
-  id            = Column("id",   Integer,    primary_key = True)
-  name          = Column("name", String(32), nullable    = False)
-  dob           = Column("dob",  Date,       nullable    = False)
-  sal           = Column("sal",  Numeric,    nullable    = False)
+  id   = Column("id",   Integer,    primary_key = True)
+  name = Column("name", String(32), nullable    = False)
+  dob  = Column("dob",  Date,       nullable    = False)
+  sal  = Column("sal",  Numeric,    nullable    = False)
 
   def __init__(self, name, dob, sal):
     self.name = name
