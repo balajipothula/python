@@ -32,15 +32,9 @@ python3 -m pip install --upgrade pip
 pip install psycopg2 SQLAlchemy
 pip install psycopg2 SQLAlchemy -t .
 
-# change directory to emp virtual environment.
-cd $HOME/emp/lib/python3.5
-
-# 
-zip -r emp.zip pandas
-zip -r emp.zip numpy
-zip -r emp.zip pytz
-zip -r emp.zip six.py
-zip -r emp.zip dateutil
-
-# 
-chmod 777 emp.zip
+# change directory to emp virtual environment,
+# zip python packages
+cd $HOME/emp/lib/python3.5/site-packages && \
+zip -qq -r $HOME/emp.zip .               && \
+chmod 777  $HOME/emp.zip                 && \
+cd
