@@ -6,3 +6,5 @@ CREATE TABLE IF NOT EXISTS "Emp" (
 );
 
 INSERT INTO "Emp" ("name", "dob", "sal") VALUES ('Ram', '1985-08-31', 123.45)
+
+ALTER TABLE "Emp" RENAME COLUMN "dateOfBirth" TO "dob";
