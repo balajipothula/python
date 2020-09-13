@@ -2,7 +2,7 @@ from datetime import date
 
 from sqlalchemy.ext.declarative import declarative_base
 
-from sqlalchemy import create_engine, MetaData, Table, Column, Integer, Numeric, String, Date
+from sqlalchemy import create_engine, MetaData, Table, Column, Integer, Float, Numeric, String, Date
 from sqlalchemy.orm import sessionmaker
 
 import psycopg2
@@ -16,7 +16,7 @@ class Emp(Base):
   id   = Column("id",   Integer,    primary_key = True)
   name = Column("name", String(32), nullable    = False)
   dob  = Column("dob",  Date,       nullable    = False)
-  sal  = Column("sal",  Numeric,    nullable    = False)
+  sal  = Column("sal",  Float,      nullable    = False)
 
   def __init__(self, name, dob, sal):
     self.name = name
@@ -26,7 +26,9 @@ class Emp(Base):
   def __repr__(self):
     return "{ id: '%s', name: '%s', dob: '%s', sal: '%s'}" % (self.id, self.name, self.dob, self.sal)
 
-engine      = create_engine("sqlite:///:memory:", case_sensitive = True, convert_unicode = False, echo = True, encoding = "utf-8")
+engine      = create_engine("postgres://ejhoiybt:qqOl4yIEO4DTDLmniwf1U99aUXcMcV9x@lallah.db.elephantsql.com:5432/ejhoiybt")
+
+#engine      = create_engine("sqlite:///:memory:", case_sensitive = True, convert_unicode = False, echo = True, encoding = "utf-8")
 metadata    = MetaData(engine)
 
 Table("Emp", metadata, 
@@ -63,7 +65,7 @@ for emp in emp_records:
 record = session.query(Emp).filter_by(id = 1).one()
 print(record)
 
-record = session.query(Emp).filter_by(name = "Ram").one()
+#record = session.query(Emp).filter_by(name = "Sam").one()
 session.delete(record)
 
 session.close()
