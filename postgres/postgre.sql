@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS "emp" (
   "surname"            VARCHAR NOT NULL CHECK (INITCAP("surname") = "surname"),
   "contactNumberArray" VARCHAR [9],
   "email"              VARCHAR UNIQUE CHECK (LOWER("email") = "email"),
-  "insertTime"         TIMESTAMP(3) WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
+  "insertTime"         TIMESTAMP(6) WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP(6)
 );
 
 -- inserting array data into table.
