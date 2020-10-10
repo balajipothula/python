@@ -1,11 +1,11 @@
 -- creating table with one column as array type.
 CREATE TABLE IF NOT EXISTS "emp" (
   "id"                 BIGSERIAL PRIMARY KEY,
-  "name"               VARCHAR   NOT NULL    CHECK (INITCAP("name")    = "name"),
-  "surname"            VARCHAR   NOT NULL    CHECK (INITCAP("surname") = "surname"),
+  "name"               VARCHAR NOT NULL CHECK (INITCAP("name") = "name"),
+  "surname"            VARCHAR NOT NULL CHECK (INITCAP("surname") = "surname"),
   "contactNumberArray" VARCHAR [9],
-  "email"              VARCHAR   UNIQUE      CHECK (LOWER("email")     = "email"),
-  "insertTime"         TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
+  "email"              VARCHAR UNIQUE CHECK (LOWER("email") = "email"),
+  "insertTime"         TIMESTAMP(3) WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 -- inserting array data into table.
