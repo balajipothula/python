@@ -2,9 +2,9 @@
 CREATE TABLE IF NOT EXISTS "emp" (
   "id"                 BIGSERIAL PRIMARY KEY,
   "name"               VARCHAR   NOT NULL    CHECK (INITCAP("name")    = "name"),
-	"surname"            VARCHAR   NOT NULL    CHECK (INITCAP("surname") = "surname"),
-	"contactNumberArray" VARCHAR [9],
-	"email"              VARCHAR   UNIQUE      CHECK (LOWER("email")     = "email")
+  "surname"            VARCHAR   NOT NULL    CHECK (INITCAP("surname") = "surname"),
+  "contactNumberArray" VARCHAR [9],
+  "email"              VARCHAR   UNIQUE      CHECK (LOWER("email")     = "email")
 );
 
 -- inserting array data into table.
