@@ -10,8 +10,6 @@ CREATE TABLE IF NOT EXISTS "emp" (
   "active"             BOOLEAN DEFAULT TRUE
 );
 
-
-
 -- creating temporary table based on existing table.
 CREATE TEMP TABLE IF NOT EXISTS "empActive"
 AS
@@ -124,7 +122,6 @@ ON CONFLICT("email")
 DO
   UPDATE SET "name" = EXCLUDED."name", "surname" = EXCLUDED."surname";
 
-
 -- violating unique constraint and handling exception.
 -- upsert (update + insert)
 INSERT INTO "emp" (
@@ -152,11 +149,6 @@ INSERT INTO "dateDemo" VALUES(TO_TIMESTAMP(1525745241));
 SELECT
   "insertDate",
   EXTRACT(EPOCH FROM "insertDate") AS "insertDate2"
-FROM "dateDemo";
-
-SELECT
-  "insertDate",
-  "insertDate" AT TIME ZONE 'UTC' AT TIME ZONE 'IST' AS "insertDateIst"
 FROM "dateDemo";
 
 SELECT
