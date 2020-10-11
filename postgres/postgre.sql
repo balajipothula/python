@@ -169,3 +169,19 @@ FROM country
 JOIN city USING (country_id)
 GROUP BY country
 LIMIT 4;
+
+
+SELECT TO_TIMESTAMP(insertDateInNs / 1000000000)::TIMESTAMP AS "insertDate"
+
+-- selecting first event for each user for that day.
+-- common table expression.
+WITH _event AS (
+  SELECT
+    ROW_NUMBER() OVER (PARTITION BY "id" ORDER BY "name" DESC) AS "rowNumber",
+    *
+  FROM "event"
+  WHERE "insertDate" = '2020-10-10 00:00:00.000'::TIMESTAMP
+
+SELECT *
+FROM _event
+WHERE "rowNumber" = 1
