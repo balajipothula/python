@@ -5,8 +5,21 @@ CREATE TABLE IF NOT EXISTS "emp" (
   "surname"            VARCHAR NOT NULL CHECK (INITCAP("surname") = "surname"),
   "contactNumberArray" VARCHAR [9],
   "email"              VARCHAR UNIQUE CHECK (LOWER("email") = "email"),
-  "insertTime"         TIMESTAMP(6) WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP(6)
+  "insertTime1"        TIMESTAMP(6) WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP(6),
+  "insertTime2"        TIMESTAMP(6) WITHOUT TIME ZONE DEFAULT NOW(),
+  "active"             BOOLEAN DEFAULT TRUE
 );
+
+
+
+-- creating temporary table based on existing table.
+CREATE TEMP TABLE IF NOT EXISTS "empActive"
+AS
+  SELECT
+    "id",
+    INITCAP(CONCAT("name", ' ', "surname")) AS "fullName"
+  FROM "emp"
+  WHERE "active" IS TRUE;
 
 -- inserting array data into table.
 INSERT INTO "emp" (
@@ -42,6 +55,19 @@ LIMIT 5;
 -- droping exist table.
 DROP TABLE IF EXISTS "emp" CASCADE;
 
+-- rename existing table.
+ALTER TABLE "emp" RENAME TO "emp2";
+
+-- 
+DELETE FROM "emp" CASCADE;
+
+DELETE FROM "emp"
+WHERE "active" IS FALSE
+RETURNING *;
+
+-- 
+TRUNCATE "emp" CASCADE RESTART IDENTITY;
+
 -- updating array data into table.
 UPDATE "emp"
 SET "contactNumberArray"[1] = '9884098840'
@@ -72,8 +98,8 @@ INSERT INTO "emp" (
   "email"
 )
 VALUES (
-  'Raj',
-  'Pokala',
+  'Radha',
+  'Krishna',
   ARRAY ['9885098850', '9848012345'],
   'radha.krishna@gmail.com'
 )
@@ -89,8 +115,8 @@ INSERT INTO "emp" (
   "email"
 )
 VALUES (
-  'Sakshi',
-  'Dhoni',
+  'Radha',
+  'Krishna',
   ARRAY ['9885098850', '9848012345'],
   'radha.krishna@gmail.com'
 )
@@ -108,8 +134,8 @@ INSERT INTO "emp" (
   "email"
 )
 VALUES (
-  'Sakshi',
-  'Dhoni',
+  'Radha',
+  'Krishna',
   ARRAY ['9885098850', '9848012345'],
   'radha.krishna@gmail.com'
 )
@@ -117,6 +143,31 @@ ON CONFLICT("email")
 DO
   UPDATE SET "email" = CONCAT(EXCLUDED."email", ';', "emp"."email");
 
+-- date example start
+
+CREATE TABLE IF NOT EXISTS "dateDemo" ("insertDate" TIMESTAMP WITHOUT TIME ZONE);
+
+INSERT INTO "dateDemo" VALUES(TO_TIMESTAMP(1525745241));
+
+SELECT
+  "insertDate",
+  EXTRACT(EPOCH FROM "insertDate") AS "insertDate2"
+FROM "dateDemo";
+
+SELECT
+  "insertDate",
+  "insertDate" AT TIME ZONE 'UTC' AT TIME ZONE 'IST' AS "insertDateIst"
+FROM "dateDemo";
+
+SELECT
+  "insertDate",
+  "insertDate" AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Calcutta' AS "insertDateIst"
+FROM "dateDemo";
+
+-- PostgreSQL supported time zones.
+SELECT * FROM pg_timezone_names;
+
+-- date example end
 
 -- 
 SELECT
