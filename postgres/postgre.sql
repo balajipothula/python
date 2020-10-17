@@ -1,12 +1,11 @@
 -- creating table with one column as array type.
-CREATE TABLE IF NOT EXISTS "emp" (
+CREATE TABLE IF NOT EXISTS "Emp" (
   "id"                 BIGSERIAL PRIMARY KEY,
   "name"               VARCHAR NOT NULL CHECK (INITCAP("name") = "name"),
   "surname"            VARCHAR NOT NULL CHECK (INITCAP("surname") = "surname"),
   "contactNumberArray" VARCHAR [9],
   "email"              VARCHAR UNIQUE CHECK (LOWER("email") = "email"),
-  "insertTime1"        TIMESTAMP(6) WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP(6),
-  "insertTime2"        TIMESTAMP(6) WITHOUT TIME ZONE DEFAULT NOW(),
+  "insertTime1"        TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
   "active"             BOOLEAN DEFAULT TRUE
 );
 
@@ -16,11 +15,11 @@ AS
   SELECT
     "id",
     INITCAP(CONCAT("name", ' ', "surname")) AS "fullName"
-  FROM "emp"
+  FROM "Emp"
   WHERE "active" IS TRUE;
 
 -- inserting array data into table.
-INSERT INTO "emp" (
+INSERT INTO "Emp" (
   "name",
   "surname",
   "contactNumberArray",
@@ -35,14 +34,14 @@ VALUES (
 
 -- selecting table records.
 SELECT *
-FROM "emp";
+FROM "Emp";
 
 -- concatenating table columns using CONCAT function
 -- and showing column output in title case.
 SELECT
   *,
   INITCAP(CONCAT("name", ' ', "surname")) AS "fullName"
-FROM "emp"
+FROM "Emp"
 WHERE
       "name"    IS NOT NULL
   AND "name"    != ''
@@ -51,45 +50,45 @@ WHERE
 LIMIT 5;
 
 -- droping exist table.
-DROP TABLE IF EXISTS "emp" CASCADE;
+DROP TABLE IF EXISTS "Emp" CASCADE;
 
 -- rename existing table.
-ALTER TABLE "emp" RENAME TO "emp2";
+ALTER TABLE "Emp" RENAME TO "Emp2";
 
 -- 
-DELETE FROM "emp" CASCADE;
+DELETE FROM "Emp" CASCADE;
 
-DELETE FROM "emp"
+DELETE FROM "Emp"
 WHERE "active" IS FALSE
 RETURNING *;
 
 -- 
-TRUNCATE "emp" CASCADE RESTART IDENTITY;
+TRUNCATE "Emp" CASCADE RESTART IDENTITY;
 
 -- updating array data into table.
-UPDATE "emp"
+UPDATE "Emp"
 SET "contactNumberArray"[1] = '9884098840'
 WHERE "id" = 101;
 
 -- selecting table column array length.
 SELECT
   ARRAY_LENGTH("contactNumberArray", 1) AS "contactNumberArrayLength"
-FROM "emp";
+FROM "Emp";
 
 -- selecting table column array index 1 values.
 SELECT
   INITCAP(CONCAT("name", ' ', "surname")) AS "fullName",
   "contactNumberArray"[1]
-FROM "emp";
+FROM "Emp";
 
 -- selecting expanded array in to multiple rows.  
 SELECT
   INITCAP(CONCAT("name", ' ', "surname")) AS "fullName",
   UNNEST("contactNumberArray")
-FROM "emp";
+FROM "Emp";
 
 -- violating unique constraint and handling exception.
-INSERT INTO "emp" (
+INSERT INTO "Emp" (
   "name",
   "surname",
   "contactNumberArray",
@@ -106,7 +105,7 @@ DO NOTHING;
 
 -- violating unique constraint and handling exception.
 -- upsert (update + insert)
-INSERT INTO "emp" (
+INSERT INTO "Emp" (
   "name",
   "surname",
   "contactNumberArray",
@@ -124,7 +123,7 @@ DO
 
 -- violating unique constraint and handling exception.
 -- upsert (update + insert)
-INSERT INTO "emp" (
+INSERT INTO "Emp" (
   "name",
   "surname",
   "contactNumberArray",
