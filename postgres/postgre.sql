@@ -3,10 +3,10 @@ CREATE TABLE IF NOT EXISTS "Emp" (
   "id"                 BIGSERIAL PRIMARY KEY,
   "name"               VARCHAR NOT NULL CHECK (INITCAP("name") = "name"),
   "surname"            VARCHAR NOT NULL CHECK (INITCAP("surname") = "surname"),
-  "contactNumberArray" VARCHAR [9],
+  "contactNumberArray" VARCHAR [9] NOT NULL,
   "email"              VARCHAR UNIQUE CHECK (LOWER("email") = "email"),
-  "insertTime1"        TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-  "active"             BOOLEAN DEFAULT TRUE
+  "active"             BOOLEAN DEFAULT TRUE,
+  "insertTime"         TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 -- creating temporary table based on existing table.
