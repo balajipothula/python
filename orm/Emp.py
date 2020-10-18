@@ -2,10 +2,20 @@ from datetime import date
 
 from sqlalchemy.ext.declarative import declarative_base
 
-from sqlalchemy import create_engine, MetaData, Table, Column, Integer, Float, Numeric, String, Date
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
+from sqlalchemy import MetaData
+from sqlalchemy import Table
+from sqlalchemy import Column
+from sqlalchemy import Integer
+from sqlalchemy import Float
+from sqlalchemy import Numeric
+from sqlalchemy import String
+from sqlalchemy import Date
+from sqlalchemy import ARRAY
+from sqlalchemy import Boolean
+from sqlalchemy import DateTime
 
-import psycopg2
+from sqlalchemy.orm import sessionmaker
 
 Base = declarative_base()
 
@@ -13,68 +23,28 @@ class Emp(Base):
 
   __tablename__ = "Emp"
 
-  id   = Column("id",   Integer,    primary_key = True)
-  name = Column("name", String(32), nullable    = False)
-  dob  = Column("dob",  Date,       nullable    = False)
-  sal  = Column("sal",  Float,      nullable    = False)
+  id             = Column("id",             Integer(),                    primary_key = True)
+  name           = Column("name",           String(),                     nullable    = False)
+  surname        = Column("surname",        String(),                     nullable    = False)
+  contactNumbers = Column("contactNumbers", ARRAY(String),                nullable    = False)
+  email          = Column("email",          String(),                     nullable    = False)
+  active         = Column("active",         Boolean(),                    nullable    = False)
+  insertTime     = Column("insertTime",     DateTime(timezone = False),   nullable    = False)
 
-  def __init__(self, name, dob, sal):
-    self.name = name
-    self.dob  = dob
-    self.sal  = sal
-
+  def __init__(self,
+               name,
+               surname,
+               contactNumbers,
+               email):
+    self.name           = name
+    self.surname        = surname
+    self.contactNumbers = contactNumbers
+    self.email          = email
 
   def __repr__(self):
-    return "{ id: '%s', name: '%s', dob: '%s', sal: '%s'}" % (self.id, self.name, self.dob, self.sal)
-
-"""
-  def __repr__(self):
-    return "{ id: {}, name: {}, dob: {}, sal: {}".format(self.id, self.name, self.dob, self.sal) 
-"""
-
-"""
-engine      = create_engine("postgres://ejhoiybt:qqOl4yIEO4DTDLmniwf1U99aUXcMcV9x@lallah.db.elephantsql.com:5432/ejhoiybt")
-"""
-
-engine      = create_engine("sqlite:///:memory:", case_sensitive = True, convert_unicode = False, echo = True, encoding = "utf-8")
-
-metadata    = MetaData(engine)
-
-Table("Emp", metadata, 
-  Column("id",   Integer,    primary_key = True),
-  Column("name", String(32), nullable    = False),
-  Column("dob",  Date,       nullable    = False),
-  Column("sal",  Numeric,    nullable    = False))
-
-metadata.create_all(engine)
-
-Session = sessionmaker(bind = engine)
-session = Session()
-
-try:
-  emp = Emp(name = "Ram", dob = date(1985, 8, 31), sal = 123.45)
-  session.add(emp)
-  session.commit()
-except SQLAlchemyError as error:
-  print(error)
-finally:
-  session.close()
-
-session = Session()
-emp = Emp(name = 'Sam', dob = date(1985, 8, 31), sal = 123.45)
-session.add(emp)
-session.commit()
-
-emp_records = session.query(Emp).all()
-
-for emp in emp_records:
-  print(emp)
-  print(emp.id, emp.name, emp.dob, emp.sal)
-
-record = session.query(Emp).filter_by(id = 1).one()
-print(record)
-
-#record = session.query(Emp).filter_by(name = "Sam").one()
-session.delete(record)
-
-session.close()
+    return '{ id: "%s", name: "%s", surname: "%s", contactNumbers: "%s", email: "%s"}' % \
+      (self.id,
+       self.name,
+       self.surname,
+       self.contactNumbers,
+       self.email)

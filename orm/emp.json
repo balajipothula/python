@@ -1,0 +1,22 @@
+{
+  "emp":[
+    {
+      "name":"Romin",
+      "surname":"Irani",
+      "contactNumbers": ["+91 98480 12345"],
+      "email":"romin.irani@gmail.com"
+    },
+    {
+      "name":"Neil",
+      "surname":"Irani",
+      "contactNumbers": ["+91 98840 98840"],
+      "email":"neil.irani@gmail.com"
+    },
+    {
+      "name":"Tom",
+      "surname":"Hanks",
+      "contactNumbers": ["+91 94450 12345"],
+      "email":"tom.hanks@gmail.com" 
+    }
+  ]
+}
