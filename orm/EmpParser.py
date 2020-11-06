@@ -115,7 +115,7 @@ def getCredentialJson(regionName, secretName):
 def insertObjects(url, objectList):
   try:
     #engine = create_engine(url, echo = True, connect_args = {"connect_timeout": 60})
-    engine      = create_engine("sqlite:///:memory:", case_sensitive = True, convert_unicode = False, echo = True, encoding = "utf-8")
+    engine  = create_engine("sqlite:///:memory:", case_sensitive = True, convert_unicode = False, echo = True, encoding = "utf-8")
     session = sessionmaker(bind = engine)()
     session.add_all(objectList)
     session.commit()
@@ -123,7 +123,9 @@ def insertObjects(url, objectList):
     logging.basicConfig(filename = "parser.log", level = logging.CRITICAL)
     log.error("Unable to insert records / objects:" + str(sqlAlchemyError))
   finally:
-    pass
+    if session:
+      session.close()
+      log.info("PostgreSQL Server Session Closed Successfully...")
 
 
 def lambda_handler(event, context):
