@@ -49,6 +49,9 @@ WHERE
   AND "surname" != ''
 LIMIT 5;
 
+-- truncate table.
+TRUNCATE TABLE "Emp" RESTART IDENTITY;
+
 -- droping exist table.
 DROP TABLE IF EXISTS "Emp" CASCADE;
 
