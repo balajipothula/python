@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS "Emp" (
-  "id"   SERIAL       PRIMARY KEY,
+  "id"   BIGSERIAL    PRIMARY KEY,
   "name" VARCHAR(50)  NOT NULL,
   "dob"  TIMESTAMP    NOT NULL,
   "sal"  NUMERIC(5,2) NOT NULL
