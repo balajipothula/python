@@ -1,3 +1,8 @@
+-- creating tablespace.
+CREATE TABLESPACE "EmpTablespace"
+LOCATION '/home/ubuntu/EmpData'
+WITH (seq_page_cost = 1, random_page_cost = 2, effective_io_concurrency = 1);
+
 -- creating table with one column as array type.
 CREATE TABLE IF NOT EXISTS "Emp" (
   "id"                 BIGSERIAL PRIMARY KEY,
@@ -7,7 +12,7 @@ CREATE TABLE IF NOT EXISTS "Emp" (
   "email"              VARCHAR UNIQUE CHECK (LOWER("email") = "email"),
   "active"             BOOLEAN DEFAULT TRUE,
   "insertTime"         TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
+) TABLESPACE "EmpTablespace";
 
 -- creating temporary table based on existing table.
 CREATE TEMP TABLE IF NOT EXISTS "empActive"
