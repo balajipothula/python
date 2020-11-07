@@ -6,6 +6,20 @@ WITH (seq_page_cost = 1, random_page_cost = 2, effective_io_concurrency = 1);
 -- creating schema.
 CREATE SCHEMA IF NOT EXISTS "EmpSchema";
 
+-- creating database.
+CREATE DATABASE "EmpDatabase"
+WITH
+  OWNER             = "emp"
+  TEMPLATE          = template0
+  ENCODING          = 'UTF8'
+  LOCALE            = 'en_US.UTF-8'
+  LC_COLLATE        = 'en_US.UTF-8'
+  LC_CTYPE          = 'en_US.UTF-8'
+  TABLESPACE        = DEFAULT
+  ALLOW_CONNECTIONS = TRUE
+  CONNECTION LIMIT  = -1
+  IS_TEMPLATE       = FALSE;
+
 -- creating table with one column as array type.
 CREATE TABLE IF NOT EXISTS "Emp" (
   "id"                 BIGSERIAL PRIMARY KEY,
