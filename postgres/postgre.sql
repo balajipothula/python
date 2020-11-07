@@ -3,6 +3,9 @@ CREATE TABLESPACE "EmpTablespace"
 LOCATION '/home/ubuntu/EmpData'
 WITH (seq_page_cost = 1, random_page_cost = 2, effective_io_concurrency = 1);
 
+-- creating schema.
+CREATE SCHEMA IF NOT EXISTS "EmpSchema";
+
 -- creating table with one column as array type.
 CREATE TABLE IF NOT EXISTS "Emp" (
   "id"                 BIGSERIAL PRIMARY KEY,
