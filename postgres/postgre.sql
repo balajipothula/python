@@ -3,6 +3,21 @@ CREATE TABLESPACE "EmpTablespace"
 LOCATION '/home/ubuntu/EmpData'
 WITH (seq_page_cost = 1, random_page_cost = 2, effective_io_concurrency = 1);
 
+-- creating user.
+CREATE USER "readonly"
+WITH
+  NOSUPERUSER
+  NOCREATEDB
+  NOCREATEROLE
+  NOINHERIT
+  LOGIN
+  NOINHERIT
+  NOREPLICATION
+  NOBYPASSRLS
+  CONNECTION LIMIT -1
+  ENCRYPTED PASSWORD S3cr3t
+  VALID UNTIL (SELECT LOCALTIME + INTERVAL '6 MONTHS');
+
 -- creating schema.
 CREATE SCHEMA IF NOT EXISTS "EmpSchema"
 AUTHORIZATION CURRENT_USER;
