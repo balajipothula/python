@@ -7,6 +7,11 @@ WITH (seq_page_cost = 1, random_page_cost = 2, effective_io_concurrency = 1);
 CREATE SCHEMA IF NOT EXISTS "EmpSchema"
 AUTHORIZATION CURRENT_USER;
 
+-- list all schemas from the current database.
+SELECT *
+FROM pg_catalog.pg_namespace
+ORDER BY nspname;
+
 -- creating database.
 CREATE DATABASE "EmpDatabase"
 WITH
