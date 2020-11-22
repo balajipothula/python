@@ -24,3 +24,13 @@ sudo apt -y install curl            \
 # grabing latest pyenv and pyenv-virtualenv source from github.
 git clone https://github.com/pyenv/pyenv.git             $HOME/.pyenv
 git clone https://github.com/yyuu/pyenv-virtualenv.git   $HOME/.pyenv/plugins/pyenv-virtualenv
+
+# 
+echo 'export PYENV_ROOT="$HOME/.pyenv"'    | tee -a "$HOME/.bashrc" "$HOME/.profile" > /dev/null
+echo 'export PATH="$PYENV_ROOT/bin:$PATH"' | tee -a "$HOME/.bashrc" "$HOME/.profile" > /dev/null
+
+echo 'if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv init -)"; fi' | tee -a "$HOME/.bashrc" "$HOME/.profile" > /dev/null
+
+exec "$SHELL"
+
+python -m pip install --upgrade pip setuptools wheel
