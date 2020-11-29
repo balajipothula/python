@@ -40,6 +40,12 @@ echo 'if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv init -)"; fi' | t
 # starting new shell.
 exec "$SHELL"
 
+# installing (multiple / specific) python via pyenv.
+pyenv install 3.6.12
+
+# setting global python version via pyenv.
+pyenv global 3.6.12
+
 # updating python pip setuptools wheel.
 python -m pip install --upgrade pip setuptools wheel
 
