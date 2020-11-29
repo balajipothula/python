@@ -49,10 +49,17 @@ pyenv global 3.6.12
 python -m pip install --upgrade pip setuptools wheel
 
 # installing psycopg specific version.
-pip install pandas==1.1.1 psycopg2-binary==2.8 -t .
+pip install pandas==1.1.1 psycopg2-binary==2.8 pgcli==3.0.0 -t .
 
 # zipping python packages.
 zip -r lib.zip .
 
 # copying zipped python packages.
 aws s3 cp lib.zip s3://emp.s3.bucket/lib.zip
+
+#aws rds generate-db-auth-token --hostname rdspostgres.123456789012.us-west-2.rds.amazonaws.com --port 5432 --region us-west-2 --username postgres
+
+#pgcli postgresql://postgres:Postgres#123@rdspostgres.123456789012.us-west-2.rds.amazonaws.com:5432/emp_db
+
+#pgcli --host rdspostgres.123456789012.us-west-2.rds.amazonaws.com --port 5432 --user postgres --password Postgres#123 --dbname emp_db --single-connection --row-limit 100 --less-chatty --prompt PostgreSQL --auto-vertical-output --warn
+
