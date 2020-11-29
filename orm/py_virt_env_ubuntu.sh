@@ -26,8 +26,8 @@ sudo apt -y install curl            \
                     zlib1g-dev
 
 # grabing latest pyenv and pyenv-virtualenv source from github.
-git clone https://github.com/pyenv/pyenv.git             $HOME/.pyenv
-git clone https://github.com/yyuu/pyenv-virtualenv.git   $HOME/.pyenv/plugins/pyenv-virtualenv
+git clone https://github.com/pyenv/pyenv.git           $HOME/.pyenv
+git clone https://github.com/yyuu/pyenv-virtualenv.git $HOME/.pyenv/plugins/pyenv-virtualenv
 
 # setting environment variables.
 echo 'export PYENV_ROOT="$HOME/.pyenv"'    | tee -a "$HOME/.bashrc" "$HOME/.profile" > /dev/null
@@ -43,4 +43,10 @@ exec "$SHELL"
 python -m pip install --upgrade pip setuptools wheel
 
 # installing psycopg specific version.
-pip install psycopg2==2.8.6 -t .
+pip install pandas==1.1.1 psycopg2-binary==2.8 -t .
+
+# zipping python packages.
+zip -r lib.zip .
+
+# copying zipped python packages.
+aws s3 cp lib.zip s3://emp.s3.bucket/lib.zip
