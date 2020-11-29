@@ -6,10 +6,10 @@
 
 # https://www.tecmint.com/pyenv-install-and-manage-multiple-python-versions-in-linux/
 
-# update packages.
+# update packages repo.
 sudo apt -y update
 
-# upgrading gcc.
+# upgrading packages.
 sudo apt -y upgrade
 
 # install python virtualenv and dependencies. 
