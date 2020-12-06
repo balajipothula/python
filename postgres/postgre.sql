@@ -1,3 +1,8 @@
+-- SELECT - Describes the type of the relation.
+-- FROM - Iroduces base relations.
+-- INNER JOIN, OUTER JOIN, LATERAL JOIN - Relational Operators compute new relations.
+-- UNION, EXECPT, INTERSECT - Set Operators.
+
 -- creating tablespace.
 CREATE TABLESPACE "EmpTablespace"
 LOCATION '/home/ubuntu/EmpData'
